@@ -35,7 +35,7 @@ function onGalleryListClick(event) {
   };
 
   addClassIsOpenOnLightboxModal();
-  setlightboxImageSrc(target);
+  setlightboxImageSrcAndAlt(target);
 
   closeIcon.addEventListener('click', onCloseIconClick);
 
@@ -47,7 +47,7 @@ function onGalleryListClick(event) {
     };
     
     removeClassIsOpenFromLightboxModal();
-    cleanlightboxImageSrc();
+    cleanlightboxImageSrcAndAlt();
   });
 };
 
@@ -55,24 +55,76 @@ function addClassIsOpenOnLightboxModal() {
   lightboxModal.classList.add("is-open");
 };
 
-function setlightboxImageSrc(target) {
+function setlightboxImageSrcAndAlt(target) {
   lightboxImage.src = target.dataset.source;
+  lightboxImage.alt = target.alt;
 }
 
 function onCloseIconClick() {
   removeClassIsOpenFromLightboxModal();
-  cleanlightboxImageSrc();
+  cleanlightboxImageSrcAndAlt();
 };
 
 function removeClassIsOpenFromLightboxModal() {
   lightboxModal.classList.remove("is-open");
 };
 
-function cleanlightboxImageSrc() {
+function cleanlightboxImageSrcAndAlt() {
   lightboxImage.src = '';
+  lightboxImage.alt = '';
 };
 
 function onLightboxOverlayClick() {
   removeClassIsOpenFromLightboxModal();
-  cleanlightboxImageSrc();
+  cleanlightboxImageSrcAndAlt();
 }
+
+
+// document.addEventListener('keyup', function(event) {
+//     if (!event.key == 'ArrowRight') {
+//       return;
+//     };
+    
+//     cleanlightboxImageSrc();
+
+//     // lightboxImage.src = 
+//   });
+
+//   document.addEventListener('keyup', function(event) {
+//     if (!event.key == 'ArrowLeft') {
+//       return;
+//     };
+    
+//     cleanlightboxImageSrc();
+
+
+//   });
+
+
+// const galleryImages = document.querySelectorAll('.gallery__image');
+
+// console.log(galleryImages[2]);
+
+// for (let i = 0; i < galleryImages.length; i += 1) {
+//   galleryImages[i] += 1;
+//   console.log(galleryImages[i]);
+// }
+
+// let array = [];
+// 2
+//  image = new Image();
+// 3
+// image.src = "example.jpg"; // картинка закэширована, но ещё не в dom'е
+// 4
+// array.push(image);
+
+
+// let array = document.getElementsByClassName('.gallery__image');
+
+// console.log(array);
+
+
+
+// const originalImagesArray = images.map(image => image.original.split(','));
+
+// console.log(originalImagesArray[0]);
