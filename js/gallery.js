@@ -11,6 +11,7 @@ let galleryElements = images.map(image => {
       class="gallery__image"
       src="${image.preview}"
       data-source="${image.original}"
+      data-index="${images.indexOf(image)}"
       alt="${image.description}"
     />
   </a>`
@@ -29,6 +30,7 @@ function onGalleryListClick(event) {
   event.preventDefault();
   
   const target = event.target;
+  console.log(target);
 
   if (!target.classList.contains('gallery__image')) {
     return;
@@ -42,12 +44,12 @@ function onGalleryListClick(event) {
   lightboxOverlay.addEventListener('click', onLightboxOverlayClick);
 
   document.addEventListener('keyup', function(event) {
-    if (!event.key == 'Escape') {
-      return;
+    if (event.key == 'Escape') {
+      removeClassIsOpenFromLightboxModal();
+      cleanlightboxImageSrcAndAlt();
     };
-    
-    removeClassIsOpenFromLightboxModal();
-    cleanlightboxImageSrcAndAlt();
+
+    return;
   });
 };
 
