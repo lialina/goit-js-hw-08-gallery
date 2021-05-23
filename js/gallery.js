@@ -17,6 +17,7 @@ let galleryElements = images.map(image => {
   </a>`
 }).join('');
 
+
 galleryList.insertAdjacentHTML('beforeend', galleryElements);
 
 const lightboxModal = document.querySelector('.js-lightbox');
@@ -32,6 +33,8 @@ function onGalleryListClick(event) {
   const target = event.target;
   console.log(target);
 
+  
+
   if (!target.classList.contains('gallery__image')) {
     return;
   };
@@ -43,14 +46,31 @@ function onGalleryListClick(event) {
 
   lightboxOverlay.addEventListener('click', onLightboxOverlayClick);
 
-  document.addEventListener('keyup', function(event) {
-    if (event.key == 'Escape') {
-      removeClassIsOpenFromLightboxModal();
-      cleanlightboxImageSrcAndAlt();
-    };
+  document.addEventListener('keyup', onEscapeBottomPress(event));
 
-    return;
-  });
+  // document.addEventListener('keyup', function(event) {
+  //   if (event.key == 'ArrowRight') {
+  //     console.log(target.dataset.index);
+
+
+  //     let imagesSrc = images.map(image => {
+  //       return `${image.original}`;
+  //     });
+  //     console.log(imagesSrc.length);
+  //     for (let i = target.dataset.index; i < imagesSrc.length; i += 1) {
+
+  //       lightboxImage.src = imagesSrc[Number(target.dataset.index)];
+  //     }
+      
+      
+  //     console.log(lightboxImage.src);
+  //     // если стрелка вправо, то срц меняется на следующий срц 
+  //     // индекс картинки в массиве - это номер дата атрибута - 1
+  //     // изобржения индекс котрого дата атрибут минус 1. срц
+  //   }
+
+  //   return;
+  // });
 };
 
 function addClassIsOpenOnLightboxModal() {
@@ -65,6 +85,8 @@ function setlightboxImageSrcAndAlt(target) {
 function onCloseIconClick() {
   removeClassIsOpenFromLightboxModal();
   cleanlightboxImageSrcAndAlt();
+
+  removeCloseIconEventListener();
 };
 
 function removeClassIsOpenFromLightboxModal() {
@@ -80,3 +102,21 @@ function onLightboxOverlayClick() {
   removeClassIsOpenFromLightboxModal();
   cleanlightboxImageSrcAndAlt();
 }
+
+function removeCloseIconEventListener() {
+  galleryList.removeEventListener('click', onGalleryListClick);
+};
+
+function onEscapeBottomPress(event) {
+  if (event.key == 'Escape') {
+    removeClassIsOpenFromLightboxModal();
+    cleanlightboxImageSrcAndAlt();
+    removeEcapeButtonEventListener()
+  };
+
+  return;
+};
+
+function removeEcapeButtonEventListener() {
+  document.removeEventListener('keyup', onEscapeBottomPress);
+};
