@@ -98,13 +98,13 @@ function cleanlightboxImageSrcAndAlt() {
   lightboxImage.alt = '';
 };
 
+function removeCloseIconEventListener() {
+  galleryList.removeEventListener('click', onGalleryListClick);
+};
+
 function onLightboxOverlayClick() {
   removeClassIsOpenFromLightboxModal();
   cleanlightboxImageSrcAndAlt();
-}
-
-function removeCloseIconEventListener() {
-  galleryList.removeEventListener('click', onGalleryListClick);
 };
 
 function onEscapeBottomPress(event) {
@@ -118,5 +118,5 @@ function onEscapeBottomPress(event) {
 };
 
 function removeEcapeButtonEventListener() {
-  document.removeEventListener('keyup', onEscapeBottomPress);
+  document.removeEventListener('keyup', onEscapeBottomPress(event));
 };
